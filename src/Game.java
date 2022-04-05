@@ -54,7 +54,7 @@ public class Game extends JFrame implements ActionListener
         }
         else if(event.getSource() == button1)
         {
-            Level ob1 = new Level();
+            choosePlayers ob1 = new choosePlayers();
             this.setVisible(false);
         }
     }

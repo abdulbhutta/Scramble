@@ -8,7 +8,10 @@ public class Play extends JFrame implements ActionListener
 {
     public static void main(String[] args) throws Exception
     {
-        new Play();
+    	String difficulty = "assets/Novice.txt";
+    	String player1 = "abdul", player2 = "Usman";
+		//String difficulty = "assets/Novice.txt";
+        new Play(player1, player2, difficulty);
     }
     private JButton button1,button2,button3,button4;
     private JTextField text1;
@@ -17,11 +20,13 @@ public class Play extends JFrame implements ActionListener
     public String wordlist[] = new String[255];
     public int numwords = 0;
     
-    public Play()
+    public Play(String player1, String player2, String difficulty)
     {
+    	System.out.println(player1);
         try 
 	 	{
-        	BufferedReader in = new BufferedReader(new FileReader("assets/Word.txt"));
+        	System.out.println(difficulty);
+        	BufferedReader in = new BufferedReader(new FileReader(difficulty));
         	String str;
         	while ((str = in.readLine()) != null) 
         	{
@@ -30,25 +35,30 @@ public class Play extends JFrame implements ActionListener
         	in.close();
         } 
         catch (IOException e){}
-        this.setSize(700,400);
+        this.setSize(700, 500);
         this.setTitle("Scramble");
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        JPanel panel = new JPanel(new GridLayout(9,3));
+        
+        JPanel panel = new JPanel(new GridLayout(10,3));
+        panel.setBackground(Color.BLUE);
         button1 = new JButton("Enter");
         button2 = new JButton("Main Menu");
         button3 = new JButton("Exit");
         button4 = new JButton("Get the answer!");
         label1 = new JLabel("");
         text1 = new JTextField(10);
+        
+        
+        panel.add(new JLabel("")); panel.add(new JLabel("               Welcome")); panel.add(new JLabel(""));
+        panel.add(new JLabel("Player Turn: " + player1)); panel.add(new JLabel("         Word Scramble")); panel.add(new JLabel("<html>TOTAL SCORE<br/>   " + player1 + "<br/>" + player2 + "</html>"));
         panel.add(new JLabel("")); panel.add(new JLabel("")); panel.add(new JLabel(""));
-        panel.add(new JLabel("")); panel.add(new JLabel("                          Word Scramble")); panel.add(new JLabel(""));
-        panel.add(new JLabel("")); panel.add(new JLabel("")); panel.add(new JLabel(""));
-        panel.add(new JLabel("Word to be scrambled:")); panel.add(label1); panel.add(new JLabel(""));
+        panel.add(new JLabel("Word to be scrambled: ")); panel.add(label1); panel.add(new JLabel(""));
         panel.add(new JLabel("")); panel.add(new JLabel("")); panel.add(new JLabel(""));
         panel.add(new JLabel("Your Guess :")); panel.add(text1); panel.add(button1);
         panel.add(new JLabel("")); panel.add(new JLabel("")); panel.add(new JLabel(""));
         panel.add(button2); panel.add(button4); panel.add(button3);
+        panel.add(new JLabel("")); panel.add(new JLabel("")); panel.add(new JLabel(""));
         panel.add(new JLabel("")); panel.add(new JLabel("")); panel.add(new JLabel(""));
         button1.addActionListener(this);
         button2.addActionListener(this);

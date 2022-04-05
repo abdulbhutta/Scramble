@@ -4,21 +4,33 @@ import java.awt.*;
 
 public class Level extends JFrame implements ActionListener
 {
-    public static void main(String[] wer) throws Exception
-    {
-        new Level();
-    }
+
     private JLabel label;
     private JButton button1, button2;
-
-    public Level()
+    String Player1, Player2;    
+    
+    public static void main(String[] wer) throws Exception
     {
+    	
+    	String player1 = null;
+    	String player2 = null ;
+    	System.out.println(player1);
+        new Level(player1, player2);
+    }
+
+    public Level(String player1, String player2)
+    {
+    	this.Player1 = player1;
+    	this.Player2 = player2;
+    	
+    	System.out.println(player1);
         this.setSize(500,200);
         this.setTitle("Select Level");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
         JPanel panel = new JPanel(new GridLayout(4,3));
         label = new JLabel("Select a difficulty of level");
+ 
         button1 = new JButton("Novice");
         button2 = new JButton("Genius");
         panel.add(label); panel.add(new JLabel("")); panel.add(new JLabel(""));
@@ -35,13 +47,15 @@ public class Level extends JFrame implements ActionListener
     {
         if(event.getSource() == button1)
         {
-            Play ob = new Play();
+            Play ob = new Play(Player1, Player2, "assets/Novice.txt");
             this.setVisible(false);
         }
         else if(event.getSource() == button2)
         {
-            Play2 ob = new Play2();
+            Play ob = new Play(Player1, Player2, "assets/Genius.txt");
             this.setVisible(false);
         }
     }
+    
+  
 }
