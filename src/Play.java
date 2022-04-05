@@ -39,9 +39,9 @@ public class Play extends JFrame implements ActionListener
         this.setTitle("Scramble");
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
         
         JPanel panel = new JPanel(new GridLayout(10,3));
-        panel.setBackground(Color.BLUE);
         button1 = new JButton("Enter");
         button2 = new JButton("Main Menu");
         button3 = new JButton("Exit");
