@@ -26,7 +26,6 @@ public class choosePlayers extends JFrame implements ActionListener {
         onePlayerButton= new JButton("1 Player");
         twoPlayerButton = new JButton("2 Player");
         
-        
         panel.add(label); 
         panel.add(onePlayerButton);
         panel.add(twoPlayerButton);

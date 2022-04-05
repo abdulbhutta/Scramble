@@ -9,7 +9,7 @@ public class Play extends JFrame implements ActionListener
     public static void main(String[] args) throws Exception
     {
     	String difficulty = "assets/Novice.txt";
-    	String player1 = "abdul", player2 = "Usman";
+    	String player1 = "Abdul", player2 = "Usman";
 		//String difficulty = "assets/Novice.txt";
         new Play(player1, player2, difficulty);
     }
@@ -19,6 +19,8 @@ public class Play extends JFrame implements ActionListener
     public String word;
     public String wordlist[] = new String[255];
     public int numwords = 0;
+    public int playerOneScore = 0;
+    public int playerTwoScore = 0;
     
     public Play(String player1, String player2, String difficulty)
     {
@@ -35,7 +37,7 @@ public class Play extends JFrame implements ActionListener
         	in.close();
         } 
         catch (IOException e){}
-        this.setSize(700, 500);
+        this.setSize(575, 750);
         this.setTitle("Scramble");
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -51,7 +53,9 @@ public class Play extends JFrame implements ActionListener
         
         
         panel.add(new JLabel("")); panel.add(new JLabel("               Welcome")); panel.add(new JLabel(""));
-        panel.add(new JLabel("Player Turn: " + player1)); panel.add(new JLabel("         Word Scramble")); panel.add(new JLabel("<html>TOTAL SCORE<br/>   " + player1 + "<br/>" + player2 + "</html>"));
+        panel.add(new JLabel("Player Turn: " + player1)); panel.add(new JLabel("         Word Scramble")); panel.add(new JLabel("<html>TOTAL SCORE<br/><br/>Name: " + player1 + " ---> Score: " + playerOneScore 
+        		+ "<br/>Name: " + player2 + " ---> Score: " + playerTwoScore + "</html>"));
+        
         panel.add(new JLabel("")); panel.add(new JLabel("")); panel.add(new JLabel(""));
         panel.add(new JLabel("Word to be scrambled: ")); panel.add(label1); panel.add(new JLabel(""));
         panel.add(new JLabel("")); panel.add(new JLabel("")); panel.add(new JLabel(""));
@@ -116,10 +120,16 @@ public class Play extends JFrame implements ActionListener
         label1.setText(scramble(word));
         return word;
     }
+    
+    public static String lowerCaseWord (String word) {
+    	String lowerCaseWord = word.toLowerCase();
+    	return lowerCaseWord;
+    }
        
     public static String scramble(String wordtoscramble) 
     {
 		String newword = "";
+		String lowerCaseWord;
 		int rndnum;
 		Random randGen = new Random();
 		boolean letter[] = new boolean[wordtoscramble.length()];
@@ -130,6 +140,9 @@ public class Play extends JFrame implements ActionListener
 				letter[rndnum] = true;
 			}
 		} while (newword.length() < wordtoscramble.length());
-		return newword;
+		
+		lowerCaseWord = lowerCaseWord(newword);
+		
+		return lowerCaseWord;
 	}
 }
