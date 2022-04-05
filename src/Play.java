@@ -16,11 +16,14 @@ public class Play extends JFrame implements ActionListener
     private JButton button1,button2,button3,button4;
     private JTextField text1;
     private JLabel label1;
+	private JLabel label2;
     public String word;
     public String wordlist[] = new String[255];
+    public int wordScore = 0;
     public int numwords = 0;
     public int playerOneScore = 0;
     public int playerTwoScore = 0;
+    public String scrambledWord;
     
     public Play(String player1, String player2, String difficulty)
     {
@@ -37,7 +40,7 @@ public class Play extends JFrame implements ActionListener
         	in.close();
         } 
         catch (IOException e){}
-        this.setSize(575, 750);
+        this.setSize(600, 750);
         this.setTitle("Scramble");
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -49,7 +52,10 @@ public class Play extends JFrame implements ActionListener
         button3 = new JButton("Exit");
         button4 = new JButton("Get the answer!");
         label1 = new JLabel("");
+        label2 = new JLabel("");
         text1 = new JTextField(10);
+        getnewword();
+        scoreWord();
         
         
         panel.add(new JLabel("")); panel.add(new JLabel("               Welcome")); panel.add(new JLabel(""));
@@ -57,7 +63,7 @@ public class Play extends JFrame implements ActionListener
         		+ "<br/>Name: " + player2 + " ---> Score: " + playerTwoScore + "</html>"));
         
         panel.add(new JLabel("")); panel.add(new JLabel("")); panel.add(new JLabel(""));
-        panel.add(new JLabel("Word to be scrambled: ")); panel.add(label1); panel.add(new JLabel(""));
+        panel.add(new JLabel("<html>Word to be scrambled: " + scrambledWord + "<br/>Word Score: " + wordScore)); panel.add(new JLabel("")); panel.add((label2));
         panel.add(new JLabel("")); panel.add(new JLabel("")); panel.add(new JLabel(""));
         panel.add(new JLabel("Your Guess :")); panel.add(text1); panel.add(button1);
         panel.add(new JLabel("")); panel.add(new JLabel("")); panel.add(new JLabel(""));
@@ -68,7 +74,8 @@ public class Play extends JFrame implements ActionListener
         button2.addActionListener(this);
         button3.addActionListener(this);
         button4.addActionListener(this);
-        getnewword();
+     
+        System.out.println(scrambledWord);
         this.add(panel);
         this.setVisible(true);
         text1.requestFocus();
@@ -86,7 +93,10 @@ public class Play extends JFrame implements ActionListener
             else if(text.equalsIgnoreCase(word))
             {
                 JOptionPane.showMessageDialog(this,"Correct!");
+                playerOneScore = playerOneScore + wordScore;
+                System.out.println(playerOneScore);
                 getnewword();
+                scoreWord();
             }
             else
             {
@@ -117,16 +127,26 @@ public class Play extends JFrame implements ActionListener
         Random randGen2 = new Random();
         rndword = randGen2.nextInt(numwords);
         word = wordlist[rndword].replace(" ","");
-        label1.setText(scramble(word));
+        System.out.println(word);
+        scrambledWord = scramble(word);
+        label1.setText(scrambledWord);
         return word;
     }
     
-    public static String lowerCaseWord (String word) {
+    public String lowerCaseWord (String word) {
     	String lowerCaseWord = word.toLowerCase();
     	return lowerCaseWord;
     }
+    
+    public void scoreWord () {
+    	Random rand = new Random();
+    	wordScore = rand.nextInt((10 - 0 + 1)+ 1);
+    	
+    	//label2.setText(String.valueOf(wordScore));
+    	//return wordScore;	
+    }
        
-    public static String scramble(String wordtoscramble) 
+    public String scramble(String wordtoscramble) 
     {
 		String newword = "";
 		String lowerCaseWord;
@@ -140,7 +160,6 @@ public class Play extends JFrame implements ActionListener
 				letter[rndnum] = true;
 			}
 		} while (newword.length() < wordtoscramble.length());
-		
 		lowerCaseWord = lowerCaseWord(newword);
 		
 		return lowerCaseWord;
