@@ -1,4 +1,4 @@
-package test;
+package Test;
 
 import static org.junit.Assert.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.util.Random;
 
 import org.junit.Test;
-import game.*;
+import Game.*;
 
 public class PlayTest {
 	
@@ -27,8 +27,7 @@ public class PlayTest {
 		System.out.println(firstWord);
 		String expected = "abacus";
 		assertEquals (expected, firstWord);
-	}
-	
+	}	
 
 	@Test
 	public void test_getScore() { // testing the method getScore

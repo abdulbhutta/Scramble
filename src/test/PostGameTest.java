@@ -1,11 +1,11 @@
-package test;
+package Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-import game.Player;
-import game.PostGame;
+import Game.Player;
+import Game.PostGame;
 
 class PostGameTest {
 
